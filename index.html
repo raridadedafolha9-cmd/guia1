@@ -1,497 +1,1115 @@
-<?php
-// index.php - Site para aprovação G2RS Google Ads
-// Empresa: Souza e Souza Junior - Advogados Associados
-// CNAE: 69.11-7-01 - Serviços advocatícios
-header('Content-Type: text/html; charset=utf-8');
-?>
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <meta name="description" content="Souza e Souza Junior - Advogados Associados | Escritório de advocacia em São José dos Campos/SP. Atuação em Direito Civil, Trabalhista, Empresarial e mais. Agende sua consulta!">
-    <meta name="keywords" content="advogados, advocacia, São José dos Campos, direito civil, direito trabalhista, direito empresarial, Souza e Souza Junior, escritório de advocacia">
-    <meta name="author" content="Souza e Souza Junior - Advogados Associados">
-    <meta name="robots" content="index, follow">
-    <link rel="canonical" href="https://<?php echo $_SERVER['HTTP_HOST']; ?>/">
-    <meta name="google-site-verification" content="INSIRA_SEU_CODIGO_DE_VERIFICACAO_AQUI">
-    
-    <title>Souza e Souza Junior - Advogados Associados | São José dos Campos/SP</title>
-    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SIL Fios e Cabos Elétricos - Home</title>
+    <meta name="description" content="Empresa líder na fabricação de fios e cabos elétricos com produtos de alta qualidade e tecnologia. Conheça nossa linha de produtos.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Poppins', sans-serif;
+            color: #333;
             line-height: 1.6;
-            color: #1a1a2e;
-            background-color: #f5f3f0;
+            overflow-x: hidden;
         }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
         }
 
         /* Header */
-        header {
-            background: #1a1a2e;
-            color: #e0d6c8;
-            padding: 1rem 0;
-            position: sticky;
+        .header {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            position: fixed;
+            width: 100%;
             top: 0;
-            z-index: 100;
-            box-shadow: 0 2px 15px rgba(0,0,0,0.3);
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
         }
 
-        .header-flex {
+        .header-top {
             display: flex;
-            justify-content: space-between;
+            justify-content: flex-end;
+            padding: 5px 5%;
+            background: rgba(0,0,0,0.2);
+        }
+
+        .lang-selector a {
+            color: #fff;
+            font-size: 12px;
+            margin-left: 10px;
+            opacity: 0.8;
+            transition: opacity 0.3s;
+        }
+
+        .lang-selector a:hover {
+            opacity: 1;
+        }
+
+        .header-main {
+            display: flex;
             align-items: center;
-            flex-wrap: wrap;
-            gap: 1rem;
+            justify-content: space-between;
+            padding: 10px 5%;
         }
 
-        .logo h1 {
-            font-size: 1.5rem;
-            letter-spacing: 1px;
-            color: #c9a96e;
+        .logo img {
+            height: 50px;
         }
 
-        .logo p {
-            font-size: 0.7rem;
-            color: #a89f94;
-        }
-
-        .badge-cnae {
-            background: #2a2a4a;
-            padding: 0.4rem 1rem;
-            border-radius: 30px;
-            font-size: 0.7rem;
-            border: 1px solid #c9a96e;
-            color: #c9a96e;
-        }
-
-        .nav-links {
+        .nav-menu {
             display: flex;
-            gap: 1.8rem;
-            list-style: none;
-            flex-wrap: wrap;
+            gap: 5px;
         }
 
-        .nav-links a {
-            color: #e0d6c8;
-            text-decoration: none;
+        .nav-menu > li {
+            position: relative;
+        }
+
+        .nav-menu > li > a {
+            color: #fff;
+            font-size: 13px;
             font-weight: 500;
-            transition: 0.3s;
+            padding: 10px 12px;
+            display: block;
+            transition: color 0.3s;
         }
 
-        .nav-links a:hover {
-            color: #c9a96e;
+        .nav-menu > li > a:hover {
+            color: #f7931e;
         }
 
-        /* Hero com imagem de advocacia */
-        .hero {
-            background: linear-gradient(rgba(26,26,46,0.7), rgba(26,26,46,0.7)), url('https://images.unsplash.com/photo-1589391886645-d51941baf7fb?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
-            background-size: cover;
-            background-position: center 30%;
-            height: 75vh;
+        .nav-menu li .dropdown {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: #fff;
+            min-width: 200px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: all 0.3s;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .nav-menu li:hover .dropdown {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown li a {
+            display: block;
+            padding: 10px 15px;
+            color: #333;
+            font-size: 13px;
+            border-bottom: 1px solid #eee;
+            transition: all 0.3s;
+        }
+
+        .dropdown li a:hover {
+            background: #f7931e;
+            color: #fff;
+        }
+
+        .header-icons {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .social-icons a {
+            color: #fff;
+            font-size: 18px;
+            opacity: 0.8;
+            transition: all 0.3s;
+        }
+
+        .social-icons a:hover {
+            opacity: 1;
+            color: #f7931e;
+        }
+
+        .social-icons img {
+            width: 24px;
+            height: 24px;
+            filter: brightness(0) invert(1);
+            transition: all 0.3s;
+        }
+
+        .social-icons a:hover img {
+            filter: brightness(0) saturate(100%) invert(63%) sepia(89%) saturate(1015%) hue-rotate(360deg) brightness(101%) contrast(94%);
+        }
+
+        .search-btn {
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        /* Hero Slider */
+        .hero-slider {
+            margin-top: 90px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .slider-container {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+
+        .slide {
+            min-width: 100%;
+            position: relative;
+        }
+
+        .slide img {
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+        }
+
+        .slide-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: #fff;
+        }
+
+        .slide-content img {
+            max-width: 400px;
+            height: auto;
+        }
+
+        .slider-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255,255,255,0.2);
+            border: none;
+            color: #fff;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            font-size: 24px;
+            cursor: pointer;
+            transition: all 0.3s;
             display: flex;
             align-items: center;
             justify-content: center;
-            text-align: center;
-            color: white;
         }
 
-        .hero-content h2 {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
+        .slider-nav:hover {
+            background: rgba(255,255,255,0.4);
         }
 
-        .hero-content p {
-            font-size: 1.2rem;
-            max-width: 650px;
-            margin: 0 auto;
+        .slider-nav.prev {
+            left: 20px;
         }
 
-        .btn-contato {
-            display: inline-block;
-            background: #c9a96e;
-            color: #1a1a2e;
-            padding: 12px 32px;
-            border-radius: 40px;
-            text-decoration: none;
-            font-weight: bold;
-            margin-top: 1.5rem;
-            transition: 0.3s;
+        .slider-nav.next {
+            right: 20px;
         }
 
-        .btn-contato:hover {
-            background: #b8985e;
-            transform: scale(1.02);
-        }
-
-        /* Seções */
-        section {
-            padding: 70px 0;
-            border-bottom: 1px solid #ddd6cc;
-        }
-
-        .section-title {
-            text-align: center;
-            font-size: 2rem;
-            margin-bottom: 2.5rem;
-            color: #1a1a2e;
-        }
-
-        .section-title:after {
-            content: '';
-            display: block;
-            width: 60px;
-            height: 3px;
-            background: #c9a96e;
-            margin: 0.6rem auto 0;
-            border-radius: 2px;
-        }
-
-        /* Grid de áreas de atuação */
-        .areas-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 2rem;
-        }
-
-        .area-card {
-            background: white;
-            border-radius: 16px;
-            overflow: hidden;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
-            transition: 0.3s;
-            text-align: center;
-            padding: 2rem 1.5rem;
-            border-top: 4px solid #c9a96e;
-        }
-
-        .area-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.12);
-        }
-
-        .area-card .icone {
-            font-size: 3rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .area-card h3 {
-            margin: 0.5rem 0;
-            color: #1a1a2e;
-        }
-
-        .area-card p {
-            font-size: 0.9rem;
-            color: #555;
-        }
-
-        /* Sobre a empresa */
-        .sobre-flex {
+        .slider-dots {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
             display: flex;
-            flex-wrap: wrap;
-            gap: 2rem;
+            gap: 8px;
+        }
+
+        .slider-dots .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.5);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .slider-dots .dot.active {
+            background: #fff;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            text-align: center;
+            padding: 50px 5%;
+            background: #fff;
+        }
+
+        .cta-section h2 {
+            font-size: 28px;
+            color: #333;
+            margin-bottom: 10px;
+            font-weight: 500;
+        }
+
+        .cta-section p {
+            color: #666;
+            margin-bottom: 25px;
+        }
+
+        .btn-whatsapp {
+            display: inline-flex;
             align-items: center;
+            gap: 10px;
+            background: #25d366;
+            color: #fff;
+            padding: 15px 35px;
+            border-radius: 30px;
+            font-size: 16px;
+            font-weight: 500;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
         }
 
-        .sobre-texto {
-            flex: 1.5;
+        .btn-whatsapp:hover {
+            background: #1da851;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.5);
         }
 
-        .sobre-imagem {
-            flex: 1;
+        .btn-whatsapp img {
+            width: 24px;
+            height: 24px;
         }
 
-        .sobre-imagem img {
+        /* Products Slider */
+        .products-slider {
+            position: relative;
+            overflow: hidden;
+            background: #f5f5f5;
+        }
+
+        .products-slider-container {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+
+        .product-slide {
+            min-width: 100%;
+            position: relative;
+        }
+
+        .product-slide img {
             width: 100%;
-            border-radius: 16px;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            height: 400px;
+            object-fit: cover;
         }
 
-        .dados-empresa {
-            background: #e8e0d6;
-            padding: 1.5rem;
-            border-radius: 12px;
-            margin-top: 1.5rem;
+        .product-slide-content {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 30px;
+            background: linear-gradient(transparent, rgba(0,0,0,0.7));
+            color: #fff;
         }
 
-        .dados-empresa p {
-            margin-bottom: 0.5rem;
+        /* Floating WhatsApp Button */
+        .floating-whatsapp {
+            position: fixed;
+            bottom: 100px;
+            right: 20px;
+            z-index: 999;
         }
 
-        .dados-empresa strong {
-            color: #1a1a2e;
-        }
-
-        .dados-empresa .destaque {
-            color: #1a1a2e;
-            font-weight: 600;
-        }
-
-        /* Contato */
-        .contato-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-
-        .contato-card {
-            background: white;
-            padding: 1.8rem;
-            border-radius: 16px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-        }
-
-        .contato-card h3 {
-            color: #1a1a2e;
-            margin-bottom: 1rem;
-            border-bottom: 2px solid #c9a96e;
-            padding-bottom: 0.5rem;
-        }
-
-        .contato-card p {
-            margin-bottom: 0.8rem;
+        .floating-whatsapp a {
             display: flex;
             align-items: center;
             gap: 10px;
-            flex-wrap: wrap;
+            background: #25d366;
+            color: #fff;
+            padding: 12px 20px;
+            border-radius: 30px;
+            font-size: 14px;
+            font-weight: 500;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+            transition: all 0.3s;
         }
 
-        .contato-card strong {
-            min-width: 110px;
-            color: #1a1a2e;
+        .floating-whatsapp a:hover {
+            transform: scale(1.05);
         }
 
-        .contato-card a {
-            color: #1a1a2e;
-            text-decoration: none;
-            transition: 0.3s;
-        }
-
-        .contato-card a:hover {
-            color: #c9a96e;
-        }
-
-        /* Mapa */
-        .mapa-container {
-            margin-top: 1rem;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-        }
-
-        .mapa-container iframe {
-            width: 100%;
-            height: 300px;
-            border: 0;
-        }
-
-        /* Privacidade */
-        .privacidade-box {
-            background: white;
-            padding: 2rem;
-            border-radius: 16px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-        }
-
-        .privacidade-box h3 {
-            color: #1a1a2e;
-            margin: 1.2rem 0 0.5rem;
-        }
-
-        .privacidade-box h3:first-child {
-            margin-top: 0;
-        }
-
-        footer {
-            background: #1a1a2e;
-            color: #a89f94;
+        /* Orcamento Section */
+        .orcamento-section {
             text-align: center;
-            padding: 2rem;
-            font-size: 0.85rem;
+            padding: 60px 5%;
+            background: #fff;
         }
 
-        footer a {
-            color: #c9a96e;
-            text-decoration: none;
+        .orcamento-section h2 {
+            font-size: 28px;
+            color: #333;
+            margin-bottom: 10px;
         }
 
-        footer .footer-destaque {
-            color: #c9a96e;
+        .orcamento-section p {
+            color: #666;
+            margin-bottom: 25px;
+        }
+
+        .btn-orcamento {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: #f7931e;
+            color: #fff;
+            padding: 15px 35px;
+            border-radius: 30px;
+            font-size: 16px;
+            font-weight: 600;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(247, 147, 30, 0.4);
+        }
+
+        .btn-orcamento:hover {
+            background: #e8850a;
+            transform: translateY(-2px);
+        }
+
+        /* Features Section */
+        .features-section {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            background: #1a1a2e;
+        }
+
+        .feature-card {
+            position: relative;
+            overflow: hidden;
+            height: 250px;
+        }
+
+        .feature-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .feature-card:hover img {
+            transform: scale(1.1);
+        }
+
+        .feature-card .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.5);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .feature-card .icon {
+            width: 60px;
+            height: 60px;
+            margin-bottom: 15px;
+        }
+
+        .feature-card h3 {
+            font-size: 14px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Products Services Section */
+        .products-services {
+            padding: 80px 5%;
+            background: #fff;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-header h2 {
+            font-size: 32px;
+            color: #333;
+            margin-bottom: 20px;
+            font-weight: 400;
+        }
+
+        .section-header p {
+            color: #666;
+            max-width: 700px;
+            margin: 0 auto;
+            font-size: 15px;
+        }
+
+        .section-header strong {
+            color: #333;
+            font-weight: 600;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .product-card {
+            background: #fff;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            transition: all 0.3s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+
+        .product-card-image {
+            position: relative;
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .product-card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .product-card-image .label {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(255,255,255,0.9);
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .product-card-content {
+            padding: 25px;
+        }
+
+        .product-card-content h3 {
+            font-size: 22px;
+            color: #333;
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+
+        .product-card-content p {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 20px;
+            line-height: 1.7;
+        }
+
+        .product-card-content a {
+            color: #f7931e;
+            font-size: 14px;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .product-card-content a:hover {
+            color: #e8850a;
+        }
+
+        /* Footer */
+        .footer {
+            background: #1a1a2e;
+            color: #fff;
+            padding: 60px 5% 0;
+        }
+
+        .footer-top {
+            display: grid;
+            grid-template-columns: 1fr 1fr 2fr;
+            gap: 40px;
+            padding-bottom: 40px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .footer-section h4 {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #fff;
+        }
+
+        .footer-section p {
+            color: rgba(255,255,255,0.7);
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+
+        .footer-section a {
+            color: rgba(255,255,255,0.7);
+            font-size: 14px;
+            display: block;
+            margin-bottom: 8px;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: #f7931e;
+        }
+
+        .footer-section .highlight {
+            color: #fff;
+            font-weight: 600;
+        }
+
+        .footer-section .link-orange {
+            color: #f7931e;
+        }
+
+        .news-item {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .news-item img {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+
+        .news-item-content h5 {
+            font-size: 15px;
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+
+        .news-item-content a {
+            color: #f7931e;
+            font-size: 13px;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding: 25px 0;
+            color: rgba(255,255,255,0.5);
+            font-size: 13px;
+        }
+
+        .footer-bottom a {
+            color: #f7931e;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .features-section {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .products-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .footer-top {
+                grid-template-columns: 1fr 1fr;
+            }
         }
 
         @media (max-width: 768px) {
-            .hero h2 { font-size: 2rem; }
-            .hero { height: 60vh; }
-            .header-flex { flex-direction: column; text-align: center; }
-            .nav-links { justify-content: center; }
-            .contato-card p { flex-direction: column; align-items: flex-start; }
-            .contato-card strong { min-width: auto; }
+            .nav-menu {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: #1a1a2e;
+                flex-direction: column;
+                padding: 20px;
+            }
+
+            .nav-menu.active {
+                display: flex;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .header-icons .social-icons {
+                display: none;
+            }
+
+            .hero-slider {
+                margin-top: 70px;
+            }
+
+            .slide img {
+                height: 300px;
+            }
+
+            .features-section {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-top {
+                grid-template-columns: 1fr;
+            }
+
+            .cta-section h2,
+            .orcamento-section h2 {
+                font-size: 22px;
+            }
+
+            .section-header h2 {
+                font-size: 26px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .features-section {
+                grid-template-columns: 1fr;
+            }
+
+            .slider-nav {
+                width: 35px;
+                height: 35px;
+                font-size: 18px;
+            }
+        }
+
+        /* SVG Icons inline */
+        .icon-whatsapp {
+            width: 24px;
+            height: 24px;
         }
     </style>
 </head>
 <body>
-
-<header>
-    <div class="container">
-        <div class="header-flex">
-            <div class="logo">
-                <h1>Souza e Souza Junior</h1>
-                <p>Advogados Associados</p>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-top">
+            <div class="lang-selector">
+                <a href="#">ENG</a>
+                <span style="color: #fff; opacity: 0.5;">|</span>
+                <a href="#">ESP</a>
             </div>
-            <div class="badge-cnae">
-                ⚖️ CNAE: 69.11-7-01 | Serviços Advocatícios
-            </div>
-            <ul class="nav-links">
-                <li><a href="#areas">Áreas de Atuação</a></li>
-                <li><a href="#sobre">O Escritório</a></li>
-                <li><a href="#privacidade">Privacidade</a></li>
-                <li><a href="#contato">Contato</a></li>
-            </ul>
         </div>
-    </div>
-</header>
-
-<main>
-    <!-- Hero -->
-    <div class="hero">
-        <div class="hero-content">
-            <h2>Excelência e compromisso com a justiça</h2>
-            <p>Souza e Souza Junior - Advogados Associados. Mais de 20 anos de atuação em São José dos Campos/SP. Defendemos seus direitos com ética e dedicação.</p>
-            <a href="#contato" class="btn-contato">Agende sua consulta →</a>
+        <div class="header-main">
+            <a href="#" class="logo">
+                <img src="https://ext.same-assets.com/1441184407/3414934892.png" alt="SIL Fios e Cabos">
+            </a>
+            <nav>
+                <ul class="nav-menu" id="navMenu">
+                    <li>
+                        <a href="#">EMPRESA</a>
+                        <ul class="dropdown">
+                            <li><a href="#">Histórico</a></li>
+                            <li><a href="#">Tecnologia</a></li>
+                            <li><a href="#">Certificados</a></li>
+                            <li><a href="#">Homologações</a></li>
+                            <li><a href="#">Política Integrada</a></li>
+                            <li><a href="#">Prêmios</a></li>
+                            <li><a href="#">Responsabilidade Social</a></li>
+                            <li><a href="#">Sustentabilidade</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#">PRODUTOS</a>
+                        <ul class="dropdown">
+                            <li><a href="#">Cabos Flexíveis</a></li>
+                            <li><a href="#">Cordões</a></li>
+                            <li><a href="#">Cabos Rígidos</a></li>
+                            <li><a href="#">Fios</a></li>
+                            <li><a href="#">Cabos de Rede</a></li>
+                            <li><a href="#">Carretéis</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#">VENDAS</a>
+                        <ul class="dropdown">
+                            <li><a href="#">Nacionais</a></li>
+                            <li><a href="#">Exportação</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#">MARKETING</a>
+                        <ul class="dropdown">
+                            <li><a href="#">Filmes</a></li>
+                            <li><a href="#">Campanhas</a></li>
+                            <li><a href="#">SIL no Futebol</a></li>
+                            <li><a href="#">TV, Rádio e Revista</a></li>
+                            <li><a href="#">Mídias Digitais</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#">VÍDEO E PODCAST</a></li>
+                    <li><a href="#">SIL NEWS</a></li>
+                    <li>
+                        <a href="#">ELETRICISTA</a>
+                        <ul class="dropdown">
+                            <li><a href="#">Apostilas</a></li>
+                            <li><a href="#">Tabelas</a></li>
+                            <li><a href="#">Cadastro Eletricista</a></li>
+                            <li><a href="#">Simuladores</a></li>
+                            <li><a href="#">Ensino a Distância</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#">CONTATO</a>
+                        <ul class="dropdown">
+                            <li><a href="#">Dúvidas</a></li>
+                            <li><a href="#">Fale Conosco</a></li>
+                            <li><a href="#">Trabalhe Conosco</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+            <div class="header-icons">
+                <div class="social-icons">
+                    <a href="https://www.instagram.com/sil_fios_e_cabos" target="_blank">
+                        <img src="https://ext.same-assets.com/1441184407/2624727071.png" alt="Instagram">
+                    </a>
+                    <a href="https://pt-br.facebook.com/silfiosecabos" target="_blank">
+                        <img src="https://ext.same-assets.com/1441184407/1050723498.png" alt="Facebook">
+                    </a>
+                </div>
+                <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
+            </div>
         </div>
-    </div>
+    </header>
 
-    <div class="container">
-        <!-- Áreas de Atuação -->
-        <section id="areas">
-            <h2 class="section-title">Áreas de Atuação</h2>
-            <div class="areas-grid">
-                <div class="area-card">
-                    <div class="icone">⚖️</div>
-                    <h3>Direito Civil</h3>
-                    <p>Contratos, indenizações, responsabilidade civil, direito das obrigações e questões patrimoniais.</p>
+    <!-- Hero Slider -->
+    <section class="hero-slider">
+        <div class="slider-container" id="heroSlider">
+            <div class="slide">
+                <img src="https://ext.same-assets.com/1441184407/3810719012.jpeg" alt="Paulistão 2026">
+            </div>
+            <div class="slide">
+                <img src="https://ext.same-assets.com/1441184407/330298814.jpeg" alt="Banner 2">
+            </div>
+            <div class="slide">
+                <img src="https://ext.same-assets.com/1441184407/3563923940.jpeg" alt="Banner 3">
+            </div>
+            <div class="slide">
+                <img src="https://ext.same-assets.com/1441184407/2415460882.jpeg" alt="Banner 4">
+            </div>
+        </div>
+        <button class="slider-nav prev" onclick="prevSlide()">&#10094;</button>
+        <button class="slider-nav next" onclick="nextSlide()">&#10095;</button>
+        <div class="slider-dots" id="sliderDots"></div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <h2>Precisa de ajuda para escolher o produto certo?</h2>
+        <p>Fale agora com um dos nossos especialistas pelo WhatsApp.</p>
+        <a href="https://wa.me/5511925037208" class="btn-whatsapp" target="_blank">
+            <svg class="icon-whatsapp" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+            </svg>
+            Falar com Especialista
+        </a>
+    </section>
+
+    <!-- Products Slider -->
+    <section class="products-slider">
+        <div class="products-slider-container" id="productsSlider">
+            <div class="product-slide">
+                <img src="https://ext.same-assets.com/1441184407/4171397527.jpeg" alt="Atox Eco Sil">
+            </div>
+            <div class="product-slide">
+                <img src="https://ext.same-assets.com/1441184407/3517711921.jpeg" alt="Palmeiras - Se é SIL">
+            </div>
+            <div class="product-slide">
+                <img src="https://ext.same-assets.com/1441184407/2924832018.jpeg" alt="Cabo Atoxsil Eco Vencedor">
+            </div>
+            <div class="product-slide">
+                <img src="https://ext.same-assets.com/1441184407/896207015.jpeg" alt="Pocket Pack Nova Embalagem">
+            </div>
+        </div>
+        <button class="slider-nav prev" onclick="prevProductSlide()">&#10094;</button>
+        <button class="slider-nav next" onclick="nextProductSlide()">&#10095;</button>
+    </section>
+
+    <!-- Orcamento Section -->
+    <section class="orcamento-section">
+        <h2>Solicite seu orçamento agora mesmo!</h2>
+        <p>Nossa equipe responde rapidamente pelo WhatsApp.</p>
+        <a href="https://wa.me/5511925037208" class="btn-orcamento" target="_blank">
+            <svg class="icon-whatsapp" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+            </svg>
+            ORÇAMENTO AQUI !
+        </a>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features-section">
+        <a href="#" class="feature-card">
+            <img src="https://ext.same-assets.com/1441184407/2658340302.jpeg" alt="Uma empresa de tradição">
+            <div class="overlay">
+                <svg class="icon" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+                </svg>
+                <h3>Uma Empresa<br>de Tradição</h3>
+            </div>
+        </a>
+        <a href="#" class="feature-card">
+            <img src="https://ext.same-assets.com/1441184407/3529817031.jpeg" alt="EAD">
+            <div class="overlay">
+                <svg class="icon" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M21 3H3c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H3V5h18v14zM9 10h2v2H9v-2zm0 4h2v2H9v-2zm4-4h2v2h-2v-2zm4 0h2v2h-2v-2zm-4 4h2v2h-2v-2zm4 0h2v2h-2v-2z"/>
+                </svg>
+                <h3>EAD</h3>
+            </div>
+        </a>
+        <a href="#" class="feature-card">
+            <img src="https://ext.same-assets.com/1441184407/3040247652.jpeg" alt="Campanhas">
+            <div class="overlay">
+                <svg class="icon" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.9 2 2 2zm6-6v-5c0-3.07-1.63-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.64 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2zm-2 1H8v-6c0-2.48 1.51-4.5 4-4.5s4 2.02 4 4.5v6z"/>
+                </svg>
+                <h3>Campanhas</h3>
+            </div>
+        </a>
+        <a href="#" class="feature-card">
+            <img src="https://ext.same-assets.com/1441184407/4099871310.jpeg" alt="Inovação e Tecnologia">
+            <div class="overlay">
+                <svg class="icon" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M9 21c0 .5.4 1 1 1h4c.6 0 1-.5 1-1v-1H9v1zm3-19C8.1 2 5 5.1 5 9c0 2.4 1.2 4.5 3 5.7V17c0 .5.4 1 1 1h6c.6 0 1-.5 1-1v-2.3c1.8-1.3 3-3.4 3-5.7 0-3.9-3.1-7-7-7z"/>
+                </svg>
+                <h3>Inovação e<br>Tecnologia</h3>
+            </div>
+        </a>
+        <a href="#" class="feature-card">
+            <img src="https://ext.same-assets.com/1441184407/3471114125.jpeg" alt="Prêmios">
+            <div class="overlay">
+                <svg class="icon" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M19 5h-2V3H7v2H5c-1.1 0-2 .9-2 2v1c0 2.55 1.92 4.63 4.39 4.94.63 1.5 1.98 2.63 3.61 2.96V19H7v2h10v-2h-4v-3.1c1.63-.33 2.98-1.46 3.61-2.96C19.08 12.63 21 10.55 21 8V7c0-1.1-.9-2-2-2zM5 8V7h2v3.82C5.84 10.4 5 9.3 5 8zm14 0c0 1.3-.84 2.4-2 2.82V7h2v1z"/>
+                </svg>
+                <h3>Prêmios</h3>
+            </div>
+        </a>
+    </section>
+
+    <!-- Products & Services Section -->
+    <section class="products-services">
+        <div class="section-header">
+            <h2>PRODUTOS & SERVIÇOS</h2>
+            <p>A <strong>SIL</strong> entende que não basta produzir bens e serviços de <strong>alta qualidade</strong>. É preciso também buscar a <strong>inovação, tecnologia</strong> e o <strong>bem-estar social</strong>.</p>
+        </div>
+        <div class="products-grid">
+            <div class="product-card">
+                <div class="product-card-image">
+                    <img src="https://ext.same-assets.com/1441184407/1290053063.jpeg" alt="Nossos produtos">
+                    <span class="label">PRODUTOS</span>
                 </div>
-                <div class="area-card">
-                    <div class="icone">👷</div>
-                    <h3>Direito Trabalhista</h3>
-                    <p>Reclamações trabalhistas, rescisões, assédio moral, horas extras e direitos dos trabalhadores.</p>
-                </div>
-                <div class="area-card">
-                    <div class="icone">🏢</div>
-                    <h3>Direito Empresarial</h3>
-                    <p>Constituição de empresas, contratos comerciais, recuperação judicial e sucessão empresarial.</p>
-                </div>
-                <div class="area-card">
-                    <div class="icone">👨‍👩‍👧‍👦</div>
-                    <h3>Direito de Família</h3>
-                    <p>Divórcio, guarda de filhos, pensão alimentícia, inventários e partilha de bens.</p>
+                <div class="product-card-content">
+                    <h3>Nossos produtos</h3>
+                    <p>Para a SIL, a Qualidade Total é prioridade absoluta, orientando a busca pela excelência. Confira nossos produtos.</p>
+                    <a href="#">Saiba Mais</a>
                 </div>
             </div>
-        </section>
+            <div class="product-card">
+                <div class="product-card-image">
+                    <img src="https://ext.same-assets.com/1441184407/429656234.jpeg" alt="Tabelas e especificações">
+                    <span class="label">TABELAS</span>
+                </div>
+                <div class="product-card-content">
+                    <h3>Tabelas e especificações</h3>
+                    <p>Tabelas e informações técnicas para apoio nas instalações elétricas.</p>
+                    <a href="#">Saiba Mais</a>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-card-image">
+                    <img src="https://ext.same-assets.com/1441184407/1288004083.jpeg" alt="Palestras e Apostilas">
+                    <span class="label">PALESTRAS</span>
+                </div>
+                <div class="product-card-content">
+                    <h3>Palestras e Apostilas</h3>
+                    <p>Preparamos palestras presenciais e apostilas para reciclar e apoiar eletricistas e consumidores.</p>
+                    <a href="#">Saiba Mais</a>
+                </div>
+            </div>
+        </div>
+    </section>
 
-        <!-- Sobre o escritório -->
-        <section id="sobre">
-            <h2 class="section-title">Sobre o Escritório</h2>
-            <div class="sobre-flex">
-                <div class="sobre-texto">
-                    <p>O escritório <strong>Souza e Souza Junior - Advogados Associados</strong> atua com excelência e compromisso na prestação de serviços jurídicos em <strong>São José dos Campos/SP</strong>. Fundado em <strong>12 de julho de 2001</strong>, construímos uma trajetória sólida baseada na confiança de nossos clientes.</p>
-                    <p style="margin-top: 1rem;">Nossa equipe é formada por profissionais qualificados e comprometidos com a defesa dos interesses de cada cliente, oferecendo soluções jurídicas personalizadas e eficientes em diversas áreas do Direito.</p>
-                    
-                    <div class="dados-empresa">
-                        <p><strong>📌 CNPJ:</strong> 04.610.837/0001-03</p>
-                        <p><strong>🏢 Razão Social:</strong> Souza e Souza Junior - Advogados Associados</p>
-                        <p><strong>🎯 Atividade principal:</strong> 69.11-7-01 - Serviços advocatícios</p>
-                        <p><strong>📅 Data de fundação:</strong> 12 de julho de 2001</p>
-                        <p><strong>📍 Sede:</strong> São José dos Campos - SP</p>
-                        <p><strong>📬 Endereço:</strong> Avenida Engenheiro Francisco José Longo, 149, Sala 141 e 143, 14º Andar, Centro, São José dos Campos/SP, CEP: 12245-001</p>
-                        <p><strong>📊 Situação Cadastral:</strong> <span class="destaque">Ativa ✓</span></p>
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-top">
+            <div class="footer-section">
+                <img src="https://ext.same-assets.com/1441184407/622876340.svg" alt="SIL" style="width: 80px; margin-bottom: 20px;">
+                <h4>CONTATO</h4>
+                <p>Rua Barão de Penedo,<br>319, SP, CEP: 07222-015</p>
+                <p>Telefone: (11) 3377-3333</p>
+                <p>SAC: <span class="highlight">0800 055 0008</span></p>
+                <p>Como chegar: <a href="#" class="link-orange">clique aqui</a></p>
+            </div>
+            <div class="footer-section">
+                <h4>EMPRESA</h4>
+                <a href="#">Histórico</a>
+                <a href="#">Certificados</a>
+                <a href="#">Homologações</a>
+                <a href="#">Prêmios</a>
+                <a href="#">Sustentabilidade</a>
+            </div>
+            <div class="footer-section">
+                <div class="news-item">
+                    <img src="https://ext.same-assets.com/1441184407/1133585648.png" alt="Paulistão">
+                    <div class="news-item-content">
+                        <h5>Sil Fios E Cabos Elétricos</h5>
+                        <a href="#">Anuncia patrocínio do Paulistão 2026 e 2027</a>
                     </div>
                 </div>
-                <div class="sobre-imagem">
-                    <img src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Escritório de advocacia">
+                <div class="news-item">
+                    <img src="https://ext.same-assets.com/1441184407/2497234362.png" alt="MESC">
+                    <div class="news-item-content">
+                        <h5>SIL Conquista Novamente<br>Prêmio MESC Do Google</h5>
+                        <a href="#">Campeã no segmento de Material Elétrico - Fios e Cabos</a>
+                    </div>
                 </div>
             </div>
-        </section>
+        </div>
+        <div class="footer-bottom">
+            <p>Copyright ©️ 2025 <a href="#">Sil Fios e Cabos Elétricos</a>. Powered by <a href="#">IdeasOnline</a>.</p>
+        </div>
+    </footer>
 
-        <!-- Política de Privacidade (LGPD) -->
-        <section id="privacidade">
-            <h2 class="section-title">Política de Privacidade</h2>
-            <div class="privacidade-box">
-                <p>A <strong>Souza e Souza Junior - Advogados Associados</strong> respeita sua privacidade e está comprometida com a proteção dos seus dados pessoais, em conformidade com a Lei Geral de Proteção de Dados (LGPD - Lei 13.709/2018).</p>
-                
-                <h3>📌 Coleta de informações</h3>
-                <p>Coletamos apenas os dados que você voluntariamente nos fornece através do formulário de contato, e-mail ou telefone: nome completo, telefone, e-mail e mensagem. Estes dados são utilizados exclusivamente para atendimento e prestação de serviços jurídicos.</p>
-                
-                <h3>🔐 Como utilizamos seus dados</h3>
-                <p>Utilizamos suas informações exclusivamente para responder suas dúvidas, agendar consultas, enviar informações sobre seus processos e comunicar novidades. Não compartilhamos seus dados com terceiros sem autorização expressa.</p>
-                
-                <h3>📧 Seus direitos (LGPD)</h3>
-                <p>Você pode solicitar a correção, exclusão ou portabilidade dos seus dados a qualquer momento através do nosso e-mail de contato.</p>
-                
-                <p style="margin-top: 1.2rem; font-size: 0.85rem;">Última atualização: Agosto/2026</p>
-            </div>
-        </section>
-
-        <!-- Contato e Localização -->
-        <section id="contato">
-            <h2 class="section-title">Contato e Localização</h2>
-            <div class="contato-grid">
-                <div class="contato-card">
-                    <h3>📬 Informações de Contato</h3>
-                    <p><strong>📧 E-mail:</strong> <a href="mailto:eliani@contarhcontabilidade.com.br">eliani@contarhcontabilidade.com.br</a></p>
-                    <p><strong>📞 Telefone:</strong> <a href="tel:+551233089470">(12) 3308-9470</a></p>
-                    <p><strong>📍 Endereço:</strong><br>
-                    Avenida Engenheiro Francisco José Longo, 149<br>
-                    Sala 141 e 143, 14º Andar<br>
-                    Centro, São José dos Campos - SP<br>
-                    CEP: 12245-001</p>
-                </div>
-                <div class="contato-card">
-                    <h3>🏢 Sobre o Escritório</h3>
-                    <p><strong>CNPJ:</strong> 04.610.837/0001-03</p>
-                    <p><strong>Fundação:</strong> 12 de julho de 2001</p>
-                    <p><strong>⏰ Atendimento:</strong><br>
-                    Segunda a Sexta: 9h às 18h<br>
-                    Sábados: Fechado</p>
-                    <p><strong>📦 Atendimento:</strong> Presencial e online. Agendamento recomendado.</p>
-                    <p style="margin-top: 0.5rem;"><a href="https://www.tonyveiculos.com.br/" target="_blank" style="color: #1a1a2e; font-weight: bold; text-decoration: underline;">🚗 Parceiro: Tony Veículos →</a></p>
-                </div>
-            </div>
-            
-            <!-- Mapa -->
-            <div class="mapa-container" style="margin-top: 2rem;">
-                <iframe 
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3669.695193924298!2d-45.887641!3d-23.179993!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94cc4b9e2f1b6a1b%3A0x8b5e5a1f5e0f8c5d!2sAv.%20Eng.%20Francisco%20Jos%C3%A9%20Longo%2C%20149%20-%20Centro%2C%20S%C3%A3o%20Jos%C3%A9%20dos%20Campos%20-%20SP%2C%2012245-001!5e0!3m2!1spt-BR!2sbr!4v1700000000000!5m2!1spt-BR!2sbr" 
-                    allowfullscreen="" 
-                    loading="lazy" 
-                    referrerpolicy="no-referrer-when-downgrade">
-                </iframe>
-            </div>
-        </section>
+    <!-- Floating WhatsApp Button -->
+    <div class="floating-whatsapp">
+        <a href="https://wa.me/5511925037208" target="_blank">
+            <svg class="icon-whatsapp" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+            </svg>
+            Fazer Orçamento
+        </a>
     </div>
-</main>
 
-<footer>
-    <div class="container">
-        <p><span class="footer-destaque">Souza e Souza Junior - Advogados Associados</span> | CNPJ: 04.610.837/0001-03</p>
-        <p>CNAE: 69.11-7-01 - Serviços advocatícios</p>
-        <p>Avenida Engenheiro Francisco José Longo, 149 - Sala 141 e 143, 14º Andar - Centro - São José dos Campos/SP - CEP: 12245-001</p>
-        <p>Fundado em 12 de julho de 2001 | &copy; <?php echo date('Y'); ?> Todos os direitos reservados.</p>
-    </div>
-</footer>
+    <script>
+        // Hero Slider
+        let heroCurrentSlide = 0;
+        const heroSlider = document.getElementById('heroSlider');
+        const heroSlides = heroSlider.querySelectorAll('.slide');
+        const totalHeroSlides = heroSlides.length;
+        const sliderDots = document.getElementById('sliderDots');
 
+        // Create dots
+        for (let i = 0; i < totalHeroSlides; i++) {
+            const dot = document.createElement('span');
+            dot.className = 'dot' + (i === 0 ? ' active' : '');
+            dot.onclick = () => goToSlide(i);
+            sliderDots.appendChild(dot);
+        }
+
+        function updateSlider() {
+            heroSlider.style.transform = translateX(-${heroCurrentSlide * 100}%);
+            document.querySelectorAll('.slider-dots .dot').forEach((dot, index) => {
+                dot.classList.toggle('active', index === heroCurrentSlide);
+            });
+        }
+
+        function nextSlide() {
+            heroCurrentSlide = (heroCurrentSlide + 1) % totalHeroSlides;
+            updateSlider();
+        }
+
+        function prevSlide() {
+            heroCurrentSlide = (heroCurrentSlide - 1 + totalHeroSlides) % totalHeroSlides;
+            updateSlider();
+        }
+
+        function goToSlide(index) {
+            heroCurrentSlide = index;
+            updateSlider();
+        }
+
+        // Auto slide
+        setInterval(nextSlide, 5000);
+
+        // Products Slider
+        let productCurrentSlide = 0;
+        const productsSlider = document.getElementById('productsSlider');
+        const productSlides = productsSlider.querySelectorAll('.product-slide');
+        const totalProductSlides = productSlides.length;
+
+        function updateProductSlider() {
+            productsSlider.style.transform = translateX(-${productCurrentSlide * 100}%);
+        }
+
+        function nextProductSlide() {
+            productCurrentSlide = (productCurrentSlide + 1) % totalProductSlides;
+            updateProductSlider();
+        }
+
+        function prevProductSlide() {
+            productCurrentSlide = (productCurrentSlide - 1 + totalProductSlides) % totalProductSlides;
+            updateProductSlider();
+        }
+
+        // Auto slide products
+        setInterval(nextProductSlide, 6000);
+
+        // Mobile Menu
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navMenu = document.getElementById('navMenu');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+    </script>
 </body>
 </html>
